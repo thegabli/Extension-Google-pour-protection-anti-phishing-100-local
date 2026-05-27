@@ -24,25 +24,25 @@ Vérification DKIM / SPF Gmail vérifie à la réception si l'email a bien été
 
 Blacklist et whitelist personnelles Vous pouvez ajouter manuellement des domaines à faire confiance depuis le popup de l'extension. Ces listes sont stockées localement dans le navigateur.
 
-Installation
+Installation :
 
-Téléchargez le ZIP
+1- Téléchargez le ZIP
 
-Décompressez-le dans un dossier
+2- Décompressez-le dans un dossier
 
-Dans Chrome, allez sur chrome://extensions
+3- Dans Chrome, allez sur chrome://extensions
 
-Activez le mode développeur (interrupteur en haut à droite)
+4- Activez le mode développeur (interrupteur en haut à droite)
 
-Cliquez sur "Charger l'extension non empaquetée"
+5- Cliquez sur "Charger l'extension non empaquetée"
 
-Sélectionnez le dossier décompressé
+6- Sélectionnez le dossier décompressé
 
-L'icône apparaît dans la barre Chrome. Ouvrez n'importe quel email dans Gmail pour voir l'extension en action.
+7- L'icône apparaît dans la barre Chrome. Ouvrez n'importe quel email dans Gmail pour voir l'extension en action.
 
-Structure du projet
+8- Structure du projet
 
-phishing-guard/
+9- phishing-guard/
 
 ├── manifest.json      — déclaration de l'extension (Manifest V3)
 
@@ -72,17 +72,28 @@ L'extension ne contacte aucun serveur externe. Toute l'analyse se fait dans le n
 
 Aucun compte, aucune authentification, aucune télémétrie.
 
-Ce qui est détecté
+Ce qui est détecté :
+
 Type d'attaque	Pris en charge
+
 Faux domaine (paypa1.com)	Oui
+
 Sous-domaine frauduleux	Oui
+
 Serveur d'envoi non autorisé (SPF)	Oui
+
 Email modifié en transit (DKIM)	Oui
+
 Relayeur tiers suspect	Oui
+
 Domaine bloqué manuellement	Oui
+
 URLs raccourcies dans le corps	En cours
+
 Vérification en temps réel via serveur	En cours
+
 Contribuer
+
 Pour ajouter des domaines phishing à la base, ouvrez une pull request en modifiant phishingDB.js. Merci d'inclure une source (signalement, scan VirusTotal, article de presse, etc.).
 
 Licence
