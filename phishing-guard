@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>PhishingGuard</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  width: 320px;
+  background: #0d1829;
+  color: #e2e8f0;
+  font-family: -apple-system,'Segoe UI',system-ui,sans-serif;
+  font-size: 13px;
+}
+
+/* ── Header ── */
+.hdr {
+  background: #0a1628;
+  padding: 14px 16px;
+  border-bottom: 1px solid #1e293b;
+  display: flex; align-items: center; gap: 10px;
+}
+.hdr-icon { font-size: 26px; }
+.hdr h1   { font-size: 15px; font-weight: 800; color: #f1f5f9; }
+.hdr p    { font-size: 11px; color: #475569; margin-top: 1px; }
+.dot { width:8px; height:8px; border-radius:50%; background:#22c55e;
+       box-shadow:0 0 6px #22c55e88; margin-left:auto; }
+
+/* ── Onglets ── */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #1e293b;
+}
+.tab {
+  flex: 1; padding: 10px 8px; text-align: center;
+  font-size: 12px; font-weight: 600; color: #475569;
+  cursor: pointer; border: none; background: none;
+  border-bottom: 2px solid transparent;
+  transition: all .15s;
+}
+.tab.active { color: #3b82f6; border-bottom-color: #3b82f6; }
+.tab:hover:not(.active) { color: #94a3b8; }
+
+/* ── Panneaux ── */
+.panel { display: none; padding: 14px 16px; }
+.panel.active { display: block; }
+
+.label {
+  font-size: 10px; font-weight: 700; color: #475569;
+  text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px;
+}
+
+/* ── Analyser ── */
+.input-row { display: flex; gap: 8px; margin-bottom: 10px; }
+input[type="text"] {
+  flex: 1; background: #0f1f36; border: 1px solid #1e3a5f;
+  border-radius: 7px; padding: 8px 10px; color: #e2e8f0;
+  font-size: 12px; font-family: monospace; outline: none;
+}
+input[type="text"]:focus { border-color: #3b82f6; }
+input[type="text"]::placeholder { color: #334155; }
+.btn-blue {
+  background: #1d4ed8; border: none; border-radius: 7px;
+  padding: 8px 12px; color: #fff; font-size: 12px;
+  font-weight: 700; cursor: pointer; white-space: nowrap;
+}
+.btn-blue:hover { background: #2563eb; }
+
+.result { display:none; border-radius:8px; overflow:hidden; border:1px solid #1e293b; margin-top:4px; }
+.result.show { display: block; }
+.result-head { padding:10px 12px; border-left:4px solid; }
+.result-verdict { font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; }
+.result-email   { font-size:11px; color:#64748b; font-family:monospace; word-break:break-all; margin-top:2px; }
+.result-reasons { list-style:none; padding:8px 12px; background:#0a1628; }
+.result-reasons li { font-size:11px; color:#94a3b8; padding:3px 0; }
+
+/* ── Whitelist ── */
+.wl-add-row { display:flex; gap:8px; margin-bottom:12px; }
+.wl-add-row input { flex:1; }
+.btn-green {
+  background: #15803d; border: none; border-radius: 7px;
+  padding: 8px 12px; color: #fff; font-size: 12px;
+  font-weight: 700; cursor: pointer; white-space: nowrap;
+}
+.btn-green:hover { background: #16a34a; }
+
+.wl-empty { text-align:center; color:#334155; padding:20px 0; font-size:12px; }
+
+.wl-list { display:flex; flex-direction:column; gap:6px; max-height:220px; overflow-y:auto; }
+.wl-item {
+  display:flex; align-items:center; gap:8px;
+  background:#0f1f36; border:1px solid #1e293b;
+  border-radius:8px; padding:8px 10px;
+}
+.wl-item-icon { font-size:16px; flex-shrink:0; }
+.wl-item-domain { flex:1; font-family:monospace; font-size:12px; color:#4ade80; word-break:break-all; }
+.wl-item-del {
+  background:none; border:none; color:#475569; font-size:16px;
+  cursor:pointer; padding:0 2px; flex-shrink:0; line-height:1;
+}
+.wl-item-del:hover { color:#ef4444; }
+
+
+.footer { padding:8px 16px; text-align:center; font-size:10px; color:#1e3a5f; border-top:1px solid #1e293b; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="hdr">
+  <div class="hdr-icon">🛡️</div>
+  <div>
+    <h1>PhishingGuard</h1>
+    <p>Protection anti-phishing</p>
+  </div>
+  <div class="dot"></div>
+</div>
+
+<!-- Onglets -->
+<div class="tabs">
+  <button class="tab active" data-tab="analyze">🔍 Analyser</button>
+  <button class="tab"        data-tab="whitelist">✅ Ma liste</button>
+</div>
+
+<!-- Panneau : Analyser -->
+<div class="panel active" id="tab-analyze">
+  <div class="label">Analyser un email manuellement</div>
+  <div class="input-row">
+    <input type="text" id="emailInput" placeholder="ex: support@paypal.com">
+    <button class="btn-blue" id="analyzeBtn">▶ Go</button>
+  </div>
+  <div class="result" id="result">
+    <div class="result-head" id="resultHead">
+      <div class="result-verdict" id="resultVerdict"></div>
+      <div class="result-email"   id="resultEmail"></div>
+    </div>
+    <ul class="result-reasons" id="resultReasons"></ul>
+  </div>
+</div>
+
+<!-- Panneau : Whitelist -->
+<div class="panel" id="tab-whitelist">
+  <div class="label">Ajouter un domaine ou email de confiance</div>
+  <div class="wl-add-row">
+    <input type="text" id="wlInput" placeholder="ex: monami@gmail.com ou domaine.fr">
+    <button class="btn-green" id="wlAddBtn">＋ Ajouter</button>
+  </div>
+  <div class="label">Domaines enregistrés</div>
+  <div id="wlList"><div class="wl-empty">Aucun domaine ajouté pour l'instant</div></div>
+</div>
+
+
+<div class="footer">PhishingGuard v3.0 — 100% local, aucune donnée envoyée</div>
+
+<script src="detector.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>
