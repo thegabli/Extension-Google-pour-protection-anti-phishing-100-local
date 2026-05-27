@@ -25,26 +25,41 @@ Vérification DKIM / SPF Gmail vérifie à la réception si l'email a bien été
 Blacklist et whitelist personnelles Vous pouvez ajouter manuellement des domaines à faire confiance depuis le popup de l'extension. Ces listes sont stockées localement dans le navigateur.
 
 Installation
+
 Téléchargez le ZIP
+
 Décompressez-le dans un dossier
+
 Dans Chrome, allez sur chrome://extensions
+
 Activez le mode développeur (interrupteur en haut à droite)
+
 Cliquez sur "Charger l'extension non empaquetée"
+
 Sélectionnez le dossier décompressé
+
 L'icône apparaît dans la barre Chrome. Ouvrez n'importe quel email dans Gmail pour voir l'extension en action.
 
 Structure du projet
+
 phishing-guard/
+
 ├── manifest.json      — déclaration de l'extension (Manifest V3)
+
 ├── phishingDB.js      — base de domaines phishing
+
 ├── detector.js        — moteur d'analyse
+
 ├── scanner.js         — script injecté dans Gmail
+
 ├── background.js      — service worker
+
 ├── popup.html         — interface du popup
+
 ├── popup.js           — logique popup
+
 └── icons/             — icônes 16 / 48 / 128 px
 
-Le popup
 Le popup s'ouvre en cliquant sur l'icône dans la barre Chrome. Il contient deux onglets :
 
 Analyser — entrez n'importe quelle adresse email pour l'analyser manuellement sans avoir à ouvrir Gmail.
