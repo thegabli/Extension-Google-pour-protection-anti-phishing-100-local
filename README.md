@@ -40,9 +40,9 @@ Installation :
 
 7- L'icône apparaît dans la barre Chrome. Ouvrez n'importe quel email dans Gmail pour voir l'extension en action.
 
-8- Structure du projet
+Structure du projet    
 
-9- phishing-guard/
+├── phishing-guard/
 
 ├── manifest.json      — déclaration de l'extension (Manifest V3)
 
