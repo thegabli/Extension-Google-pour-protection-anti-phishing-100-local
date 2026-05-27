@@ -2,6 +2,7 @@
 Extension Chrome de détection de phishing dans Gmail. Fonctionne en arrière-plan, sans compte, sans OAuth, sans envoyer la moindre donnée.
 
 Pourquoi ce projet
+
 Les attaques par phishing sont de plus en plus difficiles à repérer à l'oeil nu. Un domaine comme paypa1.com ou support-amazon.net peut tromper n'importe qui au premier coup d'oeil. Ce projet est une tentative concrète de combler ce manque directement là où on reçoit ses emails, sans passer par un service tiers.
 
 Ce que ça fait
