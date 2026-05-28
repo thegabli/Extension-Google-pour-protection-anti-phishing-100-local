@@ -61,6 +61,7 @@ les URLs contenant directement une adresse IP.
 Les liens raccourcis sont signalés comme « destination inconnue », car l'extension ne déroule pas automatiquement les URLs afin de préserver la confidentialité et éviter toute dépendance à un serveur externe.
 
 Voici ce que l'extension vérifie concrètement :
+
 Analyse du domaine
 
 Compare l'adresse de l'expéditeur avec une base de 80+ domaines phishing connus :
