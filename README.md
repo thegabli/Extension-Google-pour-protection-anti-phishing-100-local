@@ -14,6 +14,77 @@ L'email est inconnu — à traiter avec prudence
 L'email est identifié comme phishing
 La bannière se ferme automatiquement au bout de 10 secondes.
 
+Nouveautés récentes
+
+Système multilingue
+
+L'extension supporte désormais plusieurs langues :
+
+🇫🇷 Français (par défaut)
+🇬🇧 Anglais
+🇪🇸 Espagnol
+🇩🇪 Allemand
+
+La langue peut être changée directement depuis le popup grâce à un sélecteur intégré. Le changement est instantané et s'applique à la fois au popup et à la bannière Gmail.
+
+Tous les éléments de l'interface sont traduits :
+
+boutons,
+messages d'analyse,
+états de sécurité,
+raisons de détection,
+analyse des liens,
+messages SPF / DKIM.
+Analyse des liens URL
+
+L'extension peut maintenant analyser automatiquement les liens présents dans les emails Gmail.
+
+Quand un email contient des URLs, un bouton « Liens » apparaît dans la bannière afin d'afficher une analyse détaillée.
+
+Chaque lien reçoit un verdict :
+
+Sûr
+Inconnu
+Dangereux
+
+L'analyse est réalisée 100% localement dans le navigateur, sans envoyer les URLs à un serveur externe.
+
+L'extension détecte notamment :
+
+les URLs raccourcies (bit.ly, tinyurl, t.co, etc.),
+les domaines en punycode (xn--),
+les faux sous-domaines de marques connues,
+les TLD suspects (.xyz, .zip, .tk, etc.),
+les liens dont le texte affiché ne correspond pas à la vraie destination,
+les URLs contenant directement une adresse IP.
+
+Les liens raccourcis sont signalés comme « destination inconnue », car l'extension ne déroule pas automatiquement les URLs afin de préserver la confidentialité et éviter toute dépendance à un serveur externe.
+
+Voici ce que l'extension vérifie concrètement :
+Analyse du domaine
+
+Compare l'adresse de l'expéditeur avec une base de 80+ domaines phishing connus :
+faux PayPal, faux Amazon, faux Microsoft, fausses banques françaises, etc.
+
+Détection des sous-domaines frauduleux
+
+Un expéditeur comme :
+
+contact@paypal.secure-login.ru
+
+peut sembler appartenir à PayPal alors que le vrai domaine est secure-login.ru.
+
+L'extension détecte ce type de manipulation même si le domaine n'est pas encore présent dans la base.
+
+Vérification DKIM / SPF
+
+Gmail vérifie à la réception :
+
+si l'email a été envoyé depuis un serveur autorisé (SPF),
+si le contenu a été modifié pendant le transit (DKIM).
+
+L'extension lit directement ces résultats dans Gmail sans effectuer d'appel réseau supplémentaire.
+
 Voici ce que l'extension vérifie concrètement :
 
 Analyse du domaine Compare l'adresse de l'expéditeur avec une base de 80+ domaines phishing connus : faux PayPal, faux Amazon, faux Microsoft, fausses banques françaises, etc.
@@ -88,7 +159,9 @@ Relayeur tiers suspect	Oui
 
 Domaine bloqué manuellement	Oui
 
-URLs raccourcies dans le corps	En cours
+URLs raccourcies dans le corps oui
+
+Analyse heuristique des liens oui
 
 Vérification en temps réel via serveur	En cours
 
