@@ -1,174 +1,167 @@
-# Extension-Google-pour-protection-anti-phishing-100-local
-Extension Chrome de détection de phishing dans Gmail. Fonctionne en arrière-plan, sans compte, sans OAuth, sans envoyer la moindre donnée.
+# Google Extension for 100% Local Anti-Phishing Protection
+A Chrome extension that detects phishing attempts directly inside Gmail. Runs entirely in the background, with no account, no OAuth, and without sending any data whatsoever.
 
-Pourquoi ce projet :
+Why this project?
 
-Les attaques par phishing sont de plus en plus difficiles à repérer à l'oeil nu. Un domaine comme paypa1.com ou support-amazon.net peut tromper n'importe qui au premier coup d'oeil. Ce projet est une tentative concrète de combler ce manque directement là où on reçoit ses emails, sans passer par un service tiers.
+Phishing attacks are becoming increasingly difficult to spot with the naked eye. A domain such as paypa1.com or support-amazon.net can fool almost anyone at first glance.
 
-Ce que ça fait :
+This project is a practical attempt to address that problem directly where emails are received, without relying on any third-party service.
 
-Quand vous ouvrez un email dans Gmail, l'extension analyse silencieusement l'expéditeur et affiche une petite bannière en haut à droite avec son verdict :
+What it does
 
-L'email est connu et sûr
-L'email est inconnu — à traiter avec prudence
-L'email est identifié comme phishing
-La bannière se ferme automatiquement au bout de 10 secondes.
+When you open an email in Gmail, the extension silently analyzes the sender and displays a small banner in the top-right corner with its verdict:
 
-Nouveautés récentes
+Email is known and safe
+Email is unknown — proceed with caution
+Email is identified as phishing
 
-Système multilingue
+The banner automatically closes after 10 seconds.
 
-L'extension supporte désormais plusieurs langues :
+Recent Updates
+Multilingual Support
 
-🇫🇷 Français (par défaut)
-🇬🇧 Anglais
-🇪🇸 Espagnol
-🇩🇪 Allemand
+The extension now supports multiple languages:
 
-La langue peut être changée directement depuis le popup grâce à un sélecteur intégré. Le changement est instantané et s'applique à la fois au popup et à la bannière Gmail.
+🇫🇷 French (default)
+🇬🇧 English
+🇪🇸 Spanish
+🇩🇪 German
 
-Tous les éléments de l'interface sont traduits :
+The language can be changed directly from the popup through an integrated language selector.
 
-boutons,
-messages d'analyse,
-états de sécurité,
-raisons de détection,
-analyse des liens,
-messages SPF / DKIM.
-Analyse des liens URL
+The change is applied instantly to both the popup and the Gmail banner.
 
-L'extension peut maintenant analyser automatiquement les liens présents dans les emails Gmail.
+All interface elements are translated:
 
-Quand un email contient des URLs, un bouton « Liens » apparaît dans la bannière afin d'afficher une analyse détaillée.
+Buttons
+Analysis messages
+Security statuses
+Detection reasons
+URL analysis results
+SPF / DKIM messages
+URL Link Analysis
 
-Chaque lien reçoit un verdict :
+The extension can now automatically analyze links found inside Gmail emails.
 
-Sûr
-Inconnu
-Dangereux
+When an email contains URLs, a "Links" button appears in the banner to display a detailed analysis.
 
-L'analyse est réalisée 100% localement dans le navigateur, sans envoyer les URLs à un serveur externe.
+Each link receives one of the following verdicts:
 
-L'extension détecte notamment :
+Safe
+Unknown
+Dangerous
 
-les URLs raccourcies (bit.ly, tinyurl, t.co, etc.),
-les domaines en punycode (xn--),
-les faux sous-domaines de marques connues,
-les TLD suspects (.xyz, .zip, .tk, etc.),
-les liens dont le texte affiché ne correspond pas à la vraie destination,
-les URLs contenant directement une adresse IP.
+The analysis is performed entirely locally in the browser, without sending URLs to any external server.
 
-Les liens raccourcis sont signalés comme « destination inconnue », car l'extension ne déroule pas automatiquement les URLs afin de préserver la confidentialité et éviter toute dépendance à un serveur externe.
+The extension can detect:
 
-Voici ce que l'extension vérifie concrètement :
+Shortened URLs (bit.ly, tinyurl, t.co, etc.)
+Punycode domains (xn--)
+Fake subdomains impersonating known brands
+Suspicious TLDs (.xyz, .zip, .tk, etc.)
+Links whose displayed text does not match the actual destination
+URLs containing a raw IP address
 
-Analyse du domaine
+Shortened links are flagged as "unknown destination" because the extension does not automatically expand URLs, preserving privacy and avoiding any dependency on external services.
 
-Compare l'adresse de l'expéditeur avec une base de 80+ domaines phishing connus :
-faux PayPal, faux Amazon, faux Microsoft, fausses banques françaises, etc.
+What the extension checks
+Domain Analysis
 
-Détection des sous-domaines frauduleux
+The sender's address is compared against a database of more than 80 known phishing domains, including fake:
 
-Un expéditeur comme :
+PayPal
+Amazon
+Microsoft
+French banks
+And other commonly impersonated services
+Fraudulent Subdomain Detection
+
+A sender such as:
 
 contact@paypal.secure-login.ru
 
-peut sembler appartenir à PayPal alors que le vrai domaine est secure-login.ru.
+may appear to belong to PayPal, while the actual domain is secure-login.ru.
 
-L'extension détecte ce type de manipulation même si le domaine n'est pas encore présent dans la base.
+The extension detects this type of manipulation even if the domain is not yet present in the database.
 
-Vérification DKIM / SPF
+DKIM / SPF Verification
 
-Gmail vérifie à la réception :
+When Gmail receives an email, it verifies:
 
-si l'email a été envoyé depuis un serveur autorisé (SPF),
-si le contenu a été modifié pendant le transit (DKIM).
+Whether the email was sent from an authorized server (SPF)
+Whether the message content was modified during transit (DKIM)
 
-L'extension lit directement ces résultats dans Gmail sans effectuer d'appel réseau supplémentaire.
+The extension reads these results directly from Gmail without making any additional network requests.
 
-Voici ce que l'extension vérifie concrètement :
+If something is suspicious, a warning message appears in the banner.
 
-Analyse du domaine Compare l'adresse de l'expéditeur avec une base de 80+ domaines phishing connus : faux PayPal, faux Amazon, faux Microsoft, fausses banques françaises, etc.
+Personal Blacklists and Whitelists
 
-Détection des sous-domaines frauduleux Un expéditeur comme contact@paypal.secure-login.ru a l'air d'appartenir à PayPal, mais le vrai domaine est secure-login.ru. L'extension détecte ce type de manipulation même si le domaine ne figure pas dans la base.
+You can manually add trusted domains through the extension popup.
 
-Vérification DKIM / SPF Gmail vérifie à la réception si l'email a bien été envoyé depuis un serveur autorisé (SPF) et si son contenu n'a pas été modifié en transit (DKIM). L'extension lit ces résultats directement dans la page, sans aucun appel réseau supplémentaire. Si quelque chose cloche, une ligne d'alerte apparaît dans la bannière.
+These lists are stored locally in the browser.
 
-Blacklist et whitelist personnelles Vous pouvez ajouter manuellement des domaines à faire confiance depuis le popup de l'extension. Ces listes sont stockées localement dans le navigateur.
-
-Installation :
-
-1- Téléchargez le ZIP
-
-2- Décompressez-le dans un dossier
-
-3- Dans Chrome, allez sur chrome://extensions
-
-4- Activez le mode développeur (interrupteur en haut à droite)
-
-5- Cliquez sur "Charger l'extension non empaquetée"
-
-6- Sélectionnez le dossier décompressé
-
-7- L'icône apparaît dans la barre Chrome. Ouvrez n'importe quel email dans Gmail pour voir l'extension en action.
-
-Structure du projet    
-
-├── phishing-guard/
-
-├── manifest.json      — déclaration de l'extension (Manifest V3)
-
-├── phishingDB.js      — base de domaines phishing
-
-├── detector.js        — moteur d'analyse
-
-├── scanner.js         — script injecté dans Gmail
-
+Installation
+Download the ZIP file
+Extract it into a folder
+Open Chrome and go to chrome://extensions
+Enable Developer Mode (toggle in the top-right corner)
+Click Load unpacked
+Select the extracted folder
+The extension icon will appear in the Chrome toolbar. Open any Gmail email to see it in action.
+Project Structure
+phishing-guard/
+├── manifest.json      — extension declaration (Manifest V3)
+├── phishingDB.js      — phishing domain database
+├── detector.js        — detection engine
+├── scanner.js         — script injected into Gmail
 ├── background.js      — service worker
+├── popup.html         — popup interface
+├── popup.js           — popup logic
+└── icons/             — 16 / 48 / 128 px icons
 
-├── popup.html         — interface du popup
+The popup opens when clicking the extension icon in Chrome.
 
-├── popup.js           — logique popup
+It contains two tabs:
 
-└── icons/             — icônes 16 / 48 / 128 px
+Analyze
 
-Le popup s'ouvre en cliquant sur l'icône dans la barre Chrome. Il contient deux onglets :
+Enter any email address to analyze it manually without opening Gmail.
 
-Analyser — entrez n'importe quelle adresse email pour l'analyser manuellement sans avoir à ouvrir Gmail.
+Trust
 
-Confiance — ajoutez les domaines de vos contacts habituels. Les emails venant de ces domaines seront automatiquement marqués comme sûrs.
+Add domains from your regular contacts.
 
+Emails originating from these domains will automatically be marked as safe.
 
-Confidentialité
-L'extension ne contacte aucun serveur externe. Toute l'analyse se fait dans le navigateur, sur la page Gmail déjà ouverte. La whitelist et la blacklist sont stockées dans chrome.storage.local, sur votre machine uniquement.
+Privacy
 
-Aucun compte, aucune authentification, aucune télémétrie.
+The extension does not contact any external server.
 
-Ce qui est détecté :
+All analysis is performed locally inside the browser on the Gmail page already open.
 
-Type d'attaque	Pris en charge
+The whitelist and blacklist are stored in chrome.storage.local on your machine only.
 
-Faux domaine (paypa1.com)	Oui
+No account
+No authentication
+No telemetry
+Detection Capabilities
+Attack Type	Supported
+Fake domain (paypa1.com)	Yes
+Fraudulent subdomain	Yes
+Unauthorized sending server (SPF)	Yes
+Email modified in transit (DKIM)	Yes
+Suspicious third-party relay	Yes
+Manually blocked domain	Yes
+Shortened URLs in email body	Yes
+Heuristic URL analysis	Yes
+Real-time server verification	In progress
+Contributing
 
-Sous-domaine frauduleux	Oui
+To add phishing domains to the database, open a pull request and modify phishingDB.js.
 
-Serveur d'envoi non autorisé (SPF)	Oui
+Please include a source for each submission (user report, VirusTotal scan, news article, etc.).
 
-Email modifié en transit (DKIM)	Oui
+License
 
-Relayeur tiers suspect	Oui
-
-Domaine bloqué manuellement	Oui
-
-URLs raccourcies dans le corps oui
-
-Analyse heuristique des liens oui
-
-Vérification en temps réel via serveur	En cours
-
-Contribuer
-
-Pour ajouter des domaines phishing à la base, ouvrez une pull request en modifiant phishingDB.js. Merci d'inclure une source (signalement, scan VirusTotal, article de presse, etc.).
-
-Licence
 CC BY-NC-SA 4.0
