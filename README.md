@@ -111,13 +111,21 @@ Select the extracted folder
 The extension icon will appear in the Chrome toolbar. Open any Gmail email to see it in action.
 Project Structure
 phishing-guard/
+
 ├── manifest.json      — extension declaration (Manifest V3)
+
 ├── phishingDB.js      — phishing domain database
+
 ├── detector.js        — detection engine
+
 ├── scanner.js         — script injected into Gmail
+
 ├── background.js      — service worker
+
 ├── popup.html         — popup interface
+
 ├── popup.js           — popup logic
+
 └── icons/             — 16 / 48 / 128 px icons
 
 The popup opens when clicking the extension icon in Chrome.
